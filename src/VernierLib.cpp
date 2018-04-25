@@ -6,16 +6,11 @@ readMotionDetector: returns the distance reading from a Vernier Motion Detector 
 DCU:  allows you to control the output of a Vernier Digital Control Unit (DCU)
 DCUStep:  allows you to easily control a stepper motor connected to the DCU
 DCUPWM: allows you to control the voltage to a DC motor connected to the DCU
+
+Version 1.0.5 fixes a minor problem with the calibration for mV with ion-selective electrodes
 */
 
 //#define DEBUG1 // add for print statements
-#define DEBUG3 // add for resistor AutoID
-#define DEBUG4 // add for I2C AutoID
-#define DEBUG5 // add for readSensor
-#define DEBUG6 // add for Print Sensor Info (actually used in the main sketch)
-#define DEBUG6 // add for Print Sensor Info (actually used in the main sketch)
-#define DEBUG7 // add for DCU, PWM, and stepper
-#define DEBUG8 // add for Motion Detector
 //single channel version
 #include "VernierLib.h"
 #include "Arduino.h"
@@ -53,7 +48,6 @@ void VernierLib::autoID()
       _sensorData[_i] = 0;
   }
 
-  #if defined DEBUG3
   byte _resistorIDInfo[][32] =
   {
     {78, 97, 109, 101, 32, 48, 32, 32, 32, 32, 32, 32, 32, 32,          83, 104, 111, 114, 116, 78, 97, 109, 101, 32,   85, 110, 105, 116, 115, 32, 32, 0}, ///nothing*
@@ -232,9 +226,9 @@ void VernierLib::autoID()
         break;
     } // end of switch case
   }// end of if a resistor ID sensor is found
-#endif  //DEBUG3
 
-#if defined DEBUG4    
+
+ 
 if (_sensorNumber == 0) // no resistor ID sensor found; check I2C
 {
     pinMode(A4, OUTPUT); //Turn on the I2C communication!!! this can cause problems!!!
@@ -332,7 +326,7 @@ if (_sensorNumber == 0) // no resistor ID sensor found; check I2C
     pinMode(A5, INPUT);
 
 } // end of if I2C autoID
-#endif  //DEBUG4
+
 
 // Determine the sensor name:
 for (_i = 0; _i < 16; _i++)
@@ -366,11 +360,8 @@ if  (_sensorNumber == 113) strncpy(_sensorUnits, "mV      ",7); // assign name b
 #if defined DEBUG1
      Serial.print("_voltageID ");// use this line, if you want to check the autoID voltage
      Serial.println(_voltageID);// use this line, if you want to check the autoID voltage/*
- #endif  //DEBUG1
 
-
-#if defined DEBUG1
-      Serial.print("sensorData array: ");  //only if "#define" is in the code
+     Serial.print("sensorData array: ");  //only if "#define" is in the code
         for (_i = 0; _i < 129; _i++)//display whole array 
         {
             Serial.print (_i);
@@ -386,7 +377,6 @@ if  (_sensorNumber == 113) strncpy(_sensorUnits, "mV      ",7); // assign name b
 
 float VernierLib::readSensor()//This function converts count to sensor reading
 {
-  #if defined DEBUG5
   int _numberAveraged = 10; //number of readings averaged for reading reported
   int _count;
   int _sum = 0;
@@ -436,9 +426,9 @@ float VernierLib::readSensor()//This function converts count to sensor reading
   //Special calibration for Melt Station(92):
   if  (_sensorNumber == 92) _sensorReading = _intercept + _voltage * _slope + _cFactor * _voltage * _voltage;
   //Special calibration for ISEs, CA(38), NH4(39), NO3(40), Cl(41):
-  if  (_sensorNumber > 37 && _sensorNumber < 42) _sensorReading = (137.55 * _voltage - 0.1682);
+  if  (_sensorNumber > 37 && _sensorNumber < 42) _sensorReading = (137.55 * _voltage - 168.2);
   //Special calibration for Potasium(113) ISE:
-  if  (_sensorNumber == 113) _sensorReading = (137.55 * _voltage - 0.1682);//Potasium ISE
+  if  (_sensorNumber == 113) _sensorReading = (137.55 * _voltage - 168.2);//Potasium ISE
   if  (_sensorNumber == 123) _sensorReading = _intercept + _voltage * _slope + _cFactor * _voltage * _voltage;
   //Special quadratic calibration for New (Oct. 2016 Thermocouple(123));
   if (_sensorNumber == 10) //if thermistor:
@@ -487,12 +477,9 @@ float VernierLib::readSensor()//This function converts count to sensor reading
     }
     else
     return _sensorReading;
-
-   #if defined DEBUG5       
+ 
 }// END OF Read Sensor
 
-
-#endif DEBUG7
 
 void VernierLib::DCUPWM (int PWMSetting)
 {
@@ -651,9 +638,7 @@ switch (DCUSetting)
       break;
   }
 }//end of DCU 
-  #endif  //DEBUG7
 
-  #if defined DEBUG8
   float VernierLib::readMotionDetector()  //This function reads Motion Detector
 {
     /*
@@ -695,4 +680,3 @@ See www.vernier.com/arduino for more information.
   _distance= _duration *340/2/10000 ;// note the 340 is the speed of sound in m/s. note convert to cm
   return _distance;
  }
-  #endif  //DEBUG8
