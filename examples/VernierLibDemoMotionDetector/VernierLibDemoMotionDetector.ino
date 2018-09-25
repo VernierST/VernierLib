@@ -1,6 +1,6 @@
 #include "VernierLib.h" 
 VernierLib Vernier;
-float distance = 0;// distqnce in cm 
+float distance = 0;// distance in cm 
 void setup()
 {
   Serial.begin(9600);

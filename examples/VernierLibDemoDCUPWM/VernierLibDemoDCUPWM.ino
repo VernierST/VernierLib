@@ -13,7 +13,7 @@ void loop()
 {
   Serial.print(Vernier.readSensor());
   Serial.print(" ");
-  Serial.println(Vernier.sensorUnits);
+  Serial.println(Vernier.sensorUnits());
     // demononstrate PWM by fade in from min to max in increments of 5 points:
     for(int PWMSetting = 0 ; PWMSetting <= 255; PWMSetting +=5) 
     { 

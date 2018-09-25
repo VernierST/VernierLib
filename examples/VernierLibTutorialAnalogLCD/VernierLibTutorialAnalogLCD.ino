@@ -1,4 +1,4 @@
-/* VernierLibTutorialAnalogLCD (v2017)
+/* VernierLibTutorialAnalogLCD (v2018)
  * This sketch reads a data point from a Vernier Analog (BTA) 
  * sensor once every half second and prints the sensor name 
  * and sensor reading with units to an LCD screen connected
@@ -10,7 +10,8 @@
  * Plug the DCU into the Digital 2 port on the shield or into a
  * Digital Protoboard Adapter wired to Arduino pins 6, 7, 8, 9. 
  * Connect the LCD pins RX, GND, VDD to DCU lines 
- * D1, GND, XP respectively.
+ * D4, GND, XP respectively.
+ * Make sure you connect the DCU to a 5-volt power supply.
  */
 
 #include "VernierLib.h" //include Vernier functions in this sketch

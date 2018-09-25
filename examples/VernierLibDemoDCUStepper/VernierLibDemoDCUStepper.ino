@@ -1,6 +1,6 @@
 #include "VernierLib.h" 
 VernierLib Vernier;
-int stepDelay=30; //step time in ms. If this value is too low for your motor 
+int stepDelay=30; //step time in ms. If this value is too low for your motor, it may not rotate properly
 int stepCount=48;
 int stepDirection =0;//direction 0 =CW, 1 = CCW
 
