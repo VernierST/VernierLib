@@ -2,19 +2,9 @@
 #ifndef VernierLib_h
 #define VernierLib_h
 #include <math.h>
-#define VERNIERLIB_LIB_VERSION "1.05" // displayed automatically
+#define VERNIERLIB_LIB_VERSION "1.0.6" // displayed automatically
 
-/* This is a library to make using Vernier sensors and the Digital Control Unit (DCU)
-with a Vernier/Sparkfun Interface Shield easier. There are several useful functions:
-AutoID: reads information about the sensor, including calibration information
-readSensor:  uses the calibration information and return calibrated values from the sensor
-readMotionDetector: returns the distance reading from a Vernier Motion Detector in Digital 2
-DCU:  allows you to control the output of a Vernier Digital Control Unit (DCU)
-DCUStep:  allows you to easily control a stepper motor connected to the DCU
-DCUPWM: allows you to control the voltage to a DC motor connected to the DCU
 
-Version 1.0.5 fixes a minor problem with the calibration for mV with ion-selective electrodes
-*/
 class VernierLib
 {
 public:
@@ -24,8 +14,7 @@ public:
     // it returns calibration information
     int channel()       { return _channel; };
     float voltageID()   { return _voltageID; }; 
-    int sensorNumber()  { return _sensorNumber;}; 
-    // Jenny suggests this change:  
+    int sensorNumber()  { return _sensorNumber;};  
     char* sensorName()   { return _sensorName ;};
     char* shortName()    { return _shortName  ;};
     char* sensorUnits()  { return _sensorUnits;};

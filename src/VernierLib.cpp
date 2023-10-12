@@ -1,13 +1,14 @@
-/* This is a library to make using Vernier sensors and the Digital Control Unit (DCU)
-with a Vernier/Sparkfun Interface Shield easier. There are several useful functions:
+/* This is a library to make using Vernier LabQuest sensors and the Digital Control Unit (DCU)
+with a Vernier Arduino Interface Shield (BT-ARD) easier. There are several useful functions:
 AutoID: reads information about the sensor, including calibration information
-readSensor:  uses the calibration information and return calibrated values from the sensor
-readMotionDetector: returns the distance reading from a Vernier Motion Detector in Digital 2
-DCU:  allows you to control the output of a Vernier Digital Control Unit (DCU)
-DCUStep:  allows you to easily control a stepper motor connected to the DCU
-DCUPWM: allows you to control the voltage to a DC motor connected to the DCU
+readSensor:  returns calibrated sensor data from Analog 1
+readMotionDetector: returns the distance reading from a Vernier Motion Detector in Digital 1
+DCU:  allows you to control the output of a Vernier Digital Control Unit (DCU) in Digital 2
+DCUStep:  allows you to easily control a stepper motor connected to the DCU in Digital 2
+DCUPWM: allows you to use PWM from the DCU line 4 in Digital 2
 
-Version 1.0.5 fixes a minor problem with the calibration for mV with ion-selective electrodes
+Version 1.0.6 fixes an error that occurred from how _sensorName, _shorName, and _sensorUnits were
+initialized with a const char value.
 */
 
 //#define DEBUG1 // add for print statements
