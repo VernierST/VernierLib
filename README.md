@@ -1,2 +1,2 @@
 # VernierLib
-Library to make reading Vernier sensors used on a Vernier Interface Shield easy.
+Library to read Vernier LabQuest sensors with a Vernier Arduino Interface Shield.
