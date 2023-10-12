@@ -15,7 +15,6 @@ Version 1.0.5 fixes a minor problem with the calibration for mV with ion-selecti
 #include "VernierLib.h"
 #include "Arduino.h"
 #include <Wire.h>// used for I2C communication
-#include "text.h"
 
 VernierLib::VernierLib()
 {
@@ -72,9 +71,9 @@ void VernierLib::autoID()
     {79, 120, 121, 103, 101, 110, 32, 32, 32, 32, 32, 32, 32, 32,       79, 50, 32, 32, 32, 32, 32, 32, 32, 32,        37, 32, 32, 32, 32, 32, 32, 0} //O2*};
   };
   
-  _sensorName[16]="1234567890123456"; // I am using 16 characters here, plus terminator.
-  _shortName[12]="shortName   ";//12 characters on name, plus terminator.
-  _sensorUnits[7]="Units  ";//7 characters units, plus terminator.
+  _sensorName[16]='\0'; // I am using 16 characters here, plus terminator.
+  _shortName[12]='\0';//12 characters on name, plus terminator.
+  _sensorUnits[7]='\0';//7 characters units, plus terminator.
   _sensorName[17]='\0'; // THESE MAY NOT BE NECESSARY
   _shortName[13]='\0';
   _sensorUnits[8]='\0';
@@ -490,8 +489,8 @@ void VernierLib::DCUPWM (int PWMSetting)
   digitalWrite(8, LOW);
   if (PWMSetting<0) PWMSetting =0;
   if (PWMSetting>255) PWMSetting =255;
-  Serial.print("PWM output set to ");
-  Serial.println(PWMSetting);
+  //Serial.print("PWM output set to ");
+  //Serial.println(PWMSetting);
   analogWrite(9, PWMSetting);// range 0 to 255
 }
 
