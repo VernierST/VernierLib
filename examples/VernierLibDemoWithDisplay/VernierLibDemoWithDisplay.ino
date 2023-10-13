@@ -1,27 +1,43 @@
+/*
+Read the information that is stored on a Vernier LabQuest sensor
+and prints it to the Serial Monitor and LCD display, and then take 
+readings and print the sensor measurements to the Serial Monitor
+and LCD display.
+
+ - Connect the Vernier Arduino Interface Shield to a RedBoard, UNO R3 or R4.
+ - Connect a Vernier LabQuest sensor to ANALOG 1
+ - Connect a Vernier Digital Control Unit (DCU) to DIGITAL 2
+ - Connect the LCD pins RX, GND, VDD to DCU lines D4, GND, XP, respectively.
+ - Upload the code and then view the output on the LCD display or Serial Monitor
+
+*/
+
+#include <SoftwareSerial.h> //library used in printing to display
 #include "VernierLib.h" 
 VernierLib Vernier;
-float   sensorReading;
-///
+
 const int buttonPin=12; //button on Vernier Interface Shield
 int buttonState = 0;//variable for reading the pushbutton 
 char namestring[17];//character array for printing strings to display
 char tempstring[16]; // character array used to create string for displaying numbers
-#include <SoftwareSerial.h> //library used in printing to display
 SoftwareSerial mySerial(3,9); //for display, pin 9 = TX, pin 3 = RX (unused)
-///
+
+// Configure Serial Monitor and read sensor information
 void setup(void)
 {
   Serial.begin(9600);
-  ///
+  while (!Serial);
+  delay(4000);   //Need time for the Serial Monitor to become available
+
   mySerial.begin(9600); // for sending characters to display
   delay(500); // wait for display to boot up
   mySerial.write(124); // adjust backlight brightness of display
   mySerial.write(150); //max=157, 150=73%, 130=40%,128=off
-  ///
-  Vernier.autoID();// this is the routine to do the autoID
+  
+  Vernier.autoID();   // automatically identify the LabQuest sensor
   printSensorInfo();
-  ///
-  //send characters to 2-line display: (you could get rid of all of this if you do not have a 2-line display) 
+
+  //send characters to 2-line display 
   //Display Name, Units, and Page
   mySerial.write(254); // cursor to beginning of first line
   mySerial.write(128);
@@ -100,15 +116,16 @@ void setup(void)
   mySerial.print(Vernier.sensorUnits());  // display units on second line
 }
 
+// Take sensor readings
 void loop()
 {
-  sensorReading =Vernier.readSensor();
+  float sensorReading =Vernier.readSensor();
   Serial.print(sensorReading);
   Serial.print(" ");
   Serial.println(Vernier.sensorUnits());
+
   mySerial.write(254); // command character
   mySerial.write(192); // move to line 2, position 0,
-  Serial.println(sensorReading);   // display Sensor Reading on monitor 
   mySerial.print(sensorReading);
   mySerial.write(254); // command character
   mySerial.write(200); // move to line 2, position 7
@@ -118,7 +135,9 @@ void loop()
   mySerial.write(192);
   mySerial.print("                "); // clear 2nd line of display for next loop 
 } 
- void printSensorInfo()
+
+// function to get the sensor's stored information
+void printSensorInfo()
  {
    // print out information about the sensor found:
    Serial.println("Sensor Information"); 

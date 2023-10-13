@@ -11,15 +11,16 @@
 #include "VernierLib.h" //include Vernier functions in this sketch
 VernierLib Vernier; //create an instance of the VernierLib library
 
-float sensorReading; //create global variable to store sensor reading
  
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);    //Need time for the Serial Monitor to become available
   Vernier.autoID(); //identify the sensor being used
 }
 
 void loop() {
-  sensorReading = Vernier.readSensor(); //read one data value
+  float sensorReading = Vernier.readSensor(); //read one data value
   Serial.print(sensorReading); //print data value 
   Serial.print(" "); //print a space
   Serial.println(Vernier.sensorUnits()); //print units and skip to next line

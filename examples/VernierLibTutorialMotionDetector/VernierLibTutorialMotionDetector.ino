@@ -13,7 +13,9 @@ VernierLib Vernier; //create an instance of the VernierLib library
 float distance; //create global variable to store sensor reading
  
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);    //Need time for the Serial Monitor to become available
 }
 
 void loop() {

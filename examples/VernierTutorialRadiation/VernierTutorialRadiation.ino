@@ -12,7 +12,9 @@ int sensorPin = 2; //create global variable for pin assignment to sensor
 unsigned long timeStart; //create global variable for start time
 
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);   //Need time for the Serial Monitor to become available
 }
 
 void loop ()

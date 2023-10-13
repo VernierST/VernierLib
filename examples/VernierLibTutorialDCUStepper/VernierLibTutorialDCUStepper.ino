@@ -12,9 +12,9 @@
 #include "VernierLib.h" //include Vernier functions in this sketch
 VernierLib Vernier; //create an instance of the VernierLib library
 
-int stepCount=48; //create global variable for number of steps; modify if not making one complete rotation
-int stepDirection=0;//create global variable for direction 0 = CW, 1 = CCW
-int stepDelay=30; //create global variable for step time in ms; modify to change the speed of rotation
+int stepCount = 48; //create global variable for number of steps; modify if not making one complete rotation
+int stepDirection = 0;//create global variable for direction 0 = CW, 1 = CCW
+int stepDelay = 30; //create global variable for step time in ms; modify to change the speed of rotation
 
 void setup() {
 }
@@ -24,6 +24,6 @@ void loop() {
   Vernier.DCU(0); //turn off all DCU lines
   delay(500); //wait half second
   stepDirection ++; //increment the step direction
-  if (stepDirection > 1) stepDirection=0; //if finished CCW, reset to CW
+  if (stepDirection > 1) stepDirection = 0; //if finished CCW, reset to CW
 }
 

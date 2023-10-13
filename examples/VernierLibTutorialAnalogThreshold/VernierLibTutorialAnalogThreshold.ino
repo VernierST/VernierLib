@@ -12,7 +12,7 @@
 VernierLib Vernier; //create an instance of the VernierLib library
 
 float sensorReading; //create global variable to store sensor reading
-float threshold=5; //set threshold value for sensor
+float threshold = 5; //set threshold value for sensor
  
 void setup() {
   Vernier.autoID(); //identify sensor being used

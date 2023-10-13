@@ -19,7 +19,9 @@ unsigned long timeus = 0; //Time in us
 
 void setup() 
   {
-   Serial.begin(9600);           // set up Serial library at 9600 bps
+    Serial.begin(9600);
+    while (!Serial);
+    delay(4000);   //Need time for the Serial Monitor to become available
     pinMode(LEDpin, OUTPUT);
     Serial.println("Vernier Format 2");
     Serial.println("Photogate blocked times taken using Ardunio");
