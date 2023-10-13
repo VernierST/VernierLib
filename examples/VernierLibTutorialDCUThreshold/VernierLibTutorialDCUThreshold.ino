@@ -14,7 +14,7 @@
 VernierLib Vernier; //create an instance of the VernierLib library
 
 float sensorReading; //create global variable to store sensor reading
-float threshold=5.0; //set threshold value for a Dual-Range Force Sensor
+float threshold = 5.0; //set threshold value for a Dual-Range Force Sensor
  
 void setup() {
   Vernier.autoID(); //identify the sensor

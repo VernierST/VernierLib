@@ -17,7 +17,10 @@ const int resPin = 5; //create global variable for pin assignment for resolution
 volatile int encoderPos = 0; //create global variable for position (variables changed within interrupts are volatile)
 
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);   //Need time for the Serial Monitor to become available
+  
   pinMode(encoderPinCCW, INPUT_PULLUP); //setup CCW pin
   pinMode(encoderPinCW, INPUT_PULLUP); //setup CW pin
   pinMode (resPin, OUTPUT); //setup pin for resolution mode

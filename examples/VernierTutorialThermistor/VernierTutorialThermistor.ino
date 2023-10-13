@@ -20,7 +20,9 @@ float rawCount; //create global variable for reading from A/D converter (0-1023)
 float temperature; //create global variable for temperature in Celsius
 
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);   //Need time for the Serial Monitor to become available
 }
 
 void loop() {

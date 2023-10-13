@@ -1,7 +1,8 @@
 /* VernierTutorialDropCount (v2017)
  * This sketch counts the number of drops that fall through 
  * a Vernier Drop Counter or Photogate during a 10 second
- * time period.
+ * time period. The number of counts that occured during the 10 s
+ * period are printed to the Serial Monitor.
  * 
  * Plug the Drop Counter or Photogate into the Digital 1 port 
  * on the Vernier Arduino Interface Shield or into a Digital 
@@ -12,7 +13,9 @@ int sensorPin = 2; //create global variable for pin assignment to sensor
 unsigned long timeStart; //create global variable for start time
 
 void setup() {
-  Serial.begin(9600); //setup communication to display
+  Serial.begin(9600);
+  while (!Serial);
+  delay(4000);    //Need time for the Serial Monitor to become available
 }
 
 void loop () {

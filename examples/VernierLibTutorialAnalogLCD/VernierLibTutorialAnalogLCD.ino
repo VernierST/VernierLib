@@ -19,7 +19,6 @@ VernierLib Vernier; //create an instance of the VernierLib library
 #include <SoftwareSerial.h> //access commands for LCD display
 SoftwareSerial mySerial(3,9); //attach the LCD RX line to Arduino pin 9
 
-float sensorReading; //create global variable to store sensor reading
 
 void setup() {
   Vernier.autoID(); //identify the sensor being used
@@ -31,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-  sensorReading = Vernier.readSensor(); //read one data value
+  float sensorReading = Vernier.readSensor(); //read one data value
   mySerial.write(254); //send command to move cursor
   mySerial.write(128); //move cursor to beginning of first line
   mySerial.print(Vernier.shortName()); //display sensor name

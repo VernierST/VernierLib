@@ -17,8 +17,8 @@ void setup() {
 }
 
 void loop() {
-  button=digitalRead(12); //get button state
-  if(button=LOW) //check if button pressed down
+  button = digitalRead(12); //get button state
+  if(button = LOW) //check if button pressed down
   {
     Vernier.DCU(1); //turn on DCU line D1
   }
